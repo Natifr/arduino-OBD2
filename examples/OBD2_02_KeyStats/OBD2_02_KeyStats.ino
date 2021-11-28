@@ -47,6 +47,9 @@ void setup() {
 void loop() {
   // loop through all the PID's in the array
   // 
+  
+  OBD2.writeSpeed()
+    
   for (int i = 0; i < NUM_PIDS; i++) {
     int pid = PIDS[i];
 
