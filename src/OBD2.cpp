@@ -695,6 +695,37 @@ int OBD2Class::supportedPidsRead()
   return 1;
 }
 
+
+int OBD2Class::writeSpeed()
+{
+    //Function clears stored Diagnostic Trouble Codes (DTC)
+
+    // make sure at least 60 ms have passed since the last response
+    unsigned long lastResponseDelta = millis() - _lastPidResponseMillis;
+    if (lastResponseDelta < 60) {
+        delay(60 - lastResponseDelta);
+    }
+
+    for (int retries = 10; retries > 0; retries--) {
+       
+        CAN.beginPacket(VEHICLE_SPEED, 8);
+
+      
+        CAN.write(0x01); // number of additional bytes
+        CAN.write(0x01); // Mode / Service 1
+        CAN.write(0x28); // Mode / Service 1
+      
+        if (CAN.endPacket()) {
+            // send success
+            break;
+        } else if (retries <= 1) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
 int OBD2Class::clearAllStoredDTC()
 {
     //Function clears stored Diagnostic Trouble Codes (DTC)
