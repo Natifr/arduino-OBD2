@@ -126,6 +126,7 @@ public:
   float pidRead(uint8_t pid);
   uint32_t pidReadRaw(uint8_t pid);
 
+  String writeSpeed();
   String vinRead();
   String ecuNameRead();
 
