@@ -708,7 +708,7 @@ int OBD2Class::writeSpeed()
 
     for (int retries = 10; retries > 0; retries--) {
        
-        CAN.beginPacket(VEHICLE_SPEED, 8);
+        CAN.beginPacket(VEHICLE_SPEED, 1);
 
       
       ////  CAN.write(0x01); // number of additional bytes
